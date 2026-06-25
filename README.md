@@ -1,4 +1,4 @@
-# Avaliação de um Mecanismo de Controle de Acesso em Redes Locais Utilizando IEEE 802.1X e FreeRADIUS
+# Implementação e Avaliação de um Mecanismo de Controle de Acesso em Redes Locais Utilizando IEEE 802.1X e FreeRADIUS
 
 ## Descrição
 
