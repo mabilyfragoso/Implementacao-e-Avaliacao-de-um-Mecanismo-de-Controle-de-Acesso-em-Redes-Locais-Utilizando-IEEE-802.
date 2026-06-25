@@ -1,5 +1,6 @@
 ﻿Configurar o Usuario_RH como suplicante 802.1X
 No Usuario_RH, crie o arquivo do wpa_supplicant:
+
 cat > /tmp/wpa_rh.conf <<'EOF'
 ctrl_interface=/var/run/wpa_supplicant
 ap_scan=0
@@ -10,12 +11,15 @@ network={
     password="senhaRH123"
 }
 EOF
-Inicie a interface e o suplicante:
-ip link set eth0 up
+Inicie a interface e o suplicante:
+ip link set eth0 up
 wpa_supplicant -Dwired -ieth0 -c/tmp/wpa_rh.conf -dd
-Repetir para Usuario_Visitante
+
+
+Repetir para Usuario_Visitante
 No Switch, pare o hostapd do RH (Ctrl+C) e suba o hostapd na porta eth2:
-cat > /tmp/hostapd-vis.conf <<'EOF'
+
+cat > /tmp/hostapd-vis.conf <<'EOF'
 driver=wired
 interface=eth2
 ieee8021x=1
@@ -29,10 +33,12 @@ logger_stdout=-1
 logger_stdout_level=0
 dump_file=/tmp/hostapd-vis.dump
 EOF
-
-hostapd -dd /tmp/hostapd-vis.conf
-No Usuario_Visitante, configure o suplicante:
-cat > /tmp/wpa_vis.conf <<'EOF'
+
+hostapd -dd /tmp/hostapd-vis.conf
+
+No Usuario_Visitante, configure o suplicante:
+
+cat > /tmp/wpa_vis.conf <<'EOF'
 ctrl_interface=/var/run/wpa_supplicant
 ap_scan=0
 network={
@@ -42,7 +48,6 @@ network={
     password="senhaVis456"
 }
 EOF
-
-ip link set eth0 up
+
+ip link set eth0 up
 wpa_supplicant -Dwired -ieth0 -c/tmp/wpa_vis.conf -dd
-
