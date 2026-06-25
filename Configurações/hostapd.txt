@@ -1,0 +1,23 @@
+﻿Configuração do Switch Autenticador com hostapd
+No Switch, crie uma configuração 802.1X para a porta do Usuario_RH. Recomenda-se começar com apenas uma porta para evitar erros, repetindo o processo para o visitante posteriormente.
+
+
+Execute o comando abaixo para gerar o arquivo de configuração em /tmp/hostapd-rh.conf:
+cat > /tmp/hostapd-rh.conf <<'EOF'
+driver=wired
+interface=eth1
+ieee8021x=1
+eapol_version=2
+own_ip_addr=192.168.1.2
+auth_server_addr=192.168.1.1
+auth_server_port=1812
+auth_server_shared_secret=chave_secreta_radius
+auth_algs=1
+logger_stdout=-1
+logger_stdout_level=0
+dump_file=/tmp/hostapd-rh.dump
+EOF
+
+Após criar o arquivo, inicie o serviço do hostapd com o seguinte comando para depuração:
+hostapd -dd /tmp/hostapd-rh.conf
+

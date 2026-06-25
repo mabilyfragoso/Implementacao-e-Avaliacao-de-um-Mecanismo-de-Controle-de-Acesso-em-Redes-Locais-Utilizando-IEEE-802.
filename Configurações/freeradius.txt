@@ -1,0 +1,27 @@
+﻿Configurar o FreeRADIUS no Servidor
+No servidor, crie os usuários e as VLANs retornadas pelo RADIUS:
+
+
+cat >> /etc/freeradius/3.0/users <<'EOF'
+# Usuario do setor RH - deve cair na VLAN 10
+joao_rh Cleartext-Password := "senhaRH123"
+    Tunnel-Type = VLAN,
+    Tunnel-Medium-Type = IEEE-802,
+    Tunnel-Private-Group-Id = "10"
+
+
+# Usuario visitante - deve cair na VLAN 99
+maria_vis Cleartext-Password := "senhaVis456"
+    Tunnel-Type = VLAN,
+    Tunnel-Medium-Type = IEEE-802,
+    Tunnel-Private-Group-Id = "99"
+EOF
+Cadastre o Switch como cliente do RADIUS:
+cat >> /etc/freeradius/3.0/clients.conf <<'EOF'
+client switch_core {
+    ipaddr = 192.168.1.2
+    secret = chave_secreta_radius
+    require_message_authenticator = no
+}
+EOF
+
