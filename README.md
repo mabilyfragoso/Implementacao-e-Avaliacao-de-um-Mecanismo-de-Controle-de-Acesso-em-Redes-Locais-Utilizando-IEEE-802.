@@ -77,8 +77,3 @@ Amabile M. Fragoso (Curso de Sistemas de Informação)
 
 Wesley P. Pereira (Curso de Sistemas de Informação)
 
-
-
-## Licença
-
-Este projeto foi desenvolvido para fins acadêmicos e educacionais.
