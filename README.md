@@ -52,7 +52,6 @@ A topologia foi construída no CORE Emulator e composta pelos seguintes elemento
 9. Realização dos testes de autenticação utilizando o comando radtest.
 10. Avaliação dos resultados obtidos.
 
-
 ## Resultados
 
 Os testes realizados demonstraram que:
